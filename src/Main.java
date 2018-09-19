@@ -148,7 +148,7 @@ public class Main {
 				} else {
 				
 				if(alias.indexOf(strs[i]) > -1) {
-					resv += resv + val_alias.get(alias.indexOf(strs[i]));
+					resv += val_alias.get(alias.indexOf(strs[i]));
 					
 				} else {
 					System.out.println("ERROR: UNDEFINED "+ strs[i]);
@@ -159,6 +159,7 @@ public class Main {
 			
 			if(!resv.isEmpty()) {
 				int calculate = RomanToInt(resv);
+				System.out.println(resv + " Credits");
 				System.out.println(calculate + " Credits");
 			}
 		}
@@ -189,8 +190,10 @@ public class Main {
 				int toCalculate = RomanToInt(res);
 				if (toCalculate > 0) {
 					val_expect = val_expect - toCalculate;
-					alias.add(strs[idx_undefined]);
-					val_alias.add(IntToRoman(val_expect));
+					if(idx_undefined > -1) {
+						alias.add(strs[idx_undefined]);
+						val_alias.add(IntToRoman(val_expect));
+					}
 					
 				} else {
 					System.out.println("Calculate Roman Error");
