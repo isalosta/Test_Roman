@@ -41,10 +41,13 @@ START
 [5][b-2][a-2] -> handler: check all variable exist
 [5][b-2][a-2]-a0 -> handler: if the variable exist, then get the expect number
 [5][b-2][a-2]-a1 -> handler: Show the expect number
+[5][b-2][a-2]-a3 -> BACK TO STATE -> [2]
 [5][b-2][a-2]-b0 -> handler: if the variable didnt exist, then terminate the process
-[5][b-2][a-2]-b1 -> handler is terminated, waiting user input. BACK TO STATE -> [2]
+[5][b-2][a-2]-b1 -> handler is terminated, waiting user input. 
+[5][b-2][a-2]-b3 -> BACK TO STATE -> [2]
 [5][b-2][b-0] -> handler: if the variable hasnt folowing number, handler terminate the process
-[5][b-2][b-1] -> handler terminated, Waiting user input. BACK TO STATE -> [2]
+[5][b-2][b-1] -> handler terminated, Waiting user input. 
+[5][b-2][b-2] -> BACK TO STATE -> [2]
 ```
 
 
