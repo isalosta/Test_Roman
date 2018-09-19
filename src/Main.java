@@ -148,8 +148,13 @@ public class Main {
 				} else {
 				
 				if(alias.indexOf(strs[i]) > -1) {
-					resv += val_alias.get(alias.indexOf(strs[i]));
-					
+					if(Objects.equals(strs[i], new String("silver"))){
+						resv += ":" + val_alias.get(alias.indexOf(strs[i]));
+					} else if(Objects.equals(strs[i], new String("iron"))) {
+						resv += ":" + val_alias.get(alias.indexOf(strs[i]));
+					} else {
+						resv += val_alias.get(alias.indexOf(strs[i]));
+					}
 				} else {
 					System.out.println("ERROR: UNDEFINED "+ strs[i]);
 					return;
@@ -158,8 +163,36 @@ public class Main {
 			}
 			
 			if(!resv.isEmpty()) {
-				int calculate = RomanToInt(resv);
-				System.out.println(resv + " Credits");
+				int calculate = 0;
+				if(resv.contains(":")) {
+					String[] arr = resv.split(":");
+					if(arr.length > 1) {
+						for(int i = 0; i<arr.length; i++) {
+							if(isNumeric(arr[i])) {
+								if(calculate > 0) {
+									calculate *= Integer.parseInt(arr[i]);
+								} else {
+									calculate += Integer.parseInt(arr[i]);
+								}
+							} else {
+								if(calculate > 0) {
+									calculate *= RomanToInt(arr[i]);
+								} else {
+									calculate += RomanToInt(arr[i]);
+								}
+							}
+						}
+					} else {
+						if(isNumeric(arr[0])) {
+							calculate = Integer.parseInt(arr[0]);
+						} else {
+							calculate = RomanToInt(arr[0]);
+						}
+					}
+				} else {
+					calculate = RomanToInt(resv);
+				}
+
 				System.out.println(calculate + " Credits");
 			}
 		}
@@ -189,18 +222,25 @@ public class Main {
 			if(val_expect > 0) {
 				int toCalculate = RomanToInt(res);
 				if (toCalculate > 0) {
-					val_expect = val_expect - toCalculate;
 					if(idx_undefined > -1) {
+						if(Objects.equals(strs[idx_undefined], new String("silver"))){
+							val_expect = val_expect / toCalculate;
+							val_alias.add(IntToRoman(val_expect));
+						} else if(Objects.equals(strs[idx_undefined], new String("iron"))) {
+							val_expect = val_expect / toCalculate;
+							val_alias.add(Integer.toString(val_expect));
+						} else {
+							val_expect = val_expect - toCalculate;
+							val_alias.add(IntToRoman(val_expect));
+						}
 						alias.add(strs[idx_undefined]);
-						val_alias.add(IntToRoman(val_expect));
-					}
-					
 				} else {
 					System.out.println("Calculate Roman Error");
 				}
 			} else {
 				System.out.println("Calculate Error");
 			}
+		}
 		}
 	}
 	
