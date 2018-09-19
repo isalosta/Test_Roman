@@ -32,6 +32,8 @@ START
 [4] -> handler would execute the decision of define or calculate the variable
 [5][a-0] -> handler: decide to define variable
 [5][a-1] -> handler: push define and their value
+[5][a-2] -> handler: if value was empty, Display error
+[5][a-3] -> BACK TO STATE -> [2]
 [5][b-0] -> handler: decide to calculate.
 [5][b-1] -> handler: check the variable would exist
 [5][b-2][a-0] -> handler: if the variable has folowing number, handler push variable and folowing number
